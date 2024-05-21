@@ -19,8 +19,13 @@ app.get('/calculations', (req, res) => {
 })
 // POST /calculations
 app.post('/calculations', (req, res) => {
+  let newCalculation = req.body;
+  
   console.log('POST /calculations received a request');
   console.log('request body: ', req.body);
+  console.log('calculations array', calculations);
+  calculations.push(newCalculation);
+  console.log('calculations array again', calculations);
   res.sendStatus(201);
 })
 

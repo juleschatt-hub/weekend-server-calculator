@@ -10,13 +10,13 @@
     <h1>Server-Side Calculator</h1>
 
     <form data-testid="calculator">
-      <input data-testid="numOne" placeholder="First Number">
-      <button>+</button>
-      <button>-</button>
-      <button>*</button>
-      <button>/</button>
-      <input data-testid="numTwo" placeholder="Second Number">
-      <button>=</button>
+      <input data-testid="numOne" id="numOne" placeholder="First Number">
+      <button type="button" value="+" id="buttonPlus" onClick="addOperator()">+</button>
+      <button type="button" value="-" id="buttonMinus" onClick="subtractOperator()">-</button>
+      <button type=button value="*" id="buttonMultiply" onClick="multiplyOperator()">*</button>
+      <button type="button" value="/" id="buttonDivide" onClick="divideOperator()">/</button>
+      <input data-testid="numTwo" id="numTwo" placeholder="Second Number">
+      <button type="submit" onClick="submitCalculationsForm(event, getOperator())">=</button>
       <button>C</button>
     </form>
 
