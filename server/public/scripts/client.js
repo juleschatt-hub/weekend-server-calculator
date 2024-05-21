@@ -1,39 +1,6 @@
 console.log('client.js is sourced!');
 
-//get data from server on page load
-// function onReady() {
-//     getResultHistoryList();
-// }
-// onReady();
 
-//result history GET request
-//display results in a list
-//when i new calculation is made, update list
-// function getResultHistoryList() {
-//     console.log('something');
-
-//     axios({
-//         method: 'GET',
-//         url: '/calculations'
-//     }).then(function(res) {
-//         console.log('sucess');
-
-//     }).catch(function(error) {
-//         console.log('Error getting results', error);
-//         alert('sorry. something didnt work quite right;')
-//     })
-// }
-
-// //renders history of calcualtions to DOM
-// let resultHistory = document.getElementById('#resultHistory');
-// resultHistory.innerHTML = '';
-// function renderResultHistoryList() {
-//     for(let calculation of calculations) {
-//         resultHistory.innerHTML += `
-//             <li></li>
-//         `
-//     }
-// }
 function getCalculation() {
     axios({
         method: 'GET',
@@ -42,6 +9,8 @@ function getCalculation() {
         .then(
             function(response){
                 let data = response.data;
+                renderCurrentResult(data);
+                renderHistoryResult(data);
             })
         .catch(
             function(error) {
@@ -76,11 +45,16 @@ function submitCalculationsForm(event, operator) {
     })
         .then(function(res){
             console.log(res.data);
+            document.querySelector('#numOne').value = '';
+            document.querySelector('#numTwo').value = '';
             getCalculation();
+            
         })
         .catch(function(error){
             console.log('failed to post calculation', error);
         })
+
+    return payload
 } //end submitCalculationsForm
 
 //Functions to set value of operator
@@ -105,23 +79,58 @@ function divideOperator() {
     console.log('value of operator', operator);
 }
 
+//returns corret operator to pass into submitCalculationsForm function
 function getOperator() {
     if (operator === '+') {
         console.log('in get operator function', operator);
-        
         return operator
     } else if (operator === '-') {
         console.log('in get operator function', operator);
-        
         return operator
     } else if(operator === '*') {
-        console.log('in get operator function', operator);
-        
+        console.log('in get operator function', operator); 
         return operator
     } else if(operator === '/') {
         console.log('in get operator function', operator);
-        
         return operator
     }
     
+} //end getOperator
+
+function renderCurrentResult(payload) {
+    let recentResult = document.getElementById('recentResult');
+    recentResult.innerHTML = '';
+
+    for(let i of payload) {
+       
+        
+       if(payload.indexOf(i) === payload.length - 1){ 
+        recentResult.innerHTML += `
+            <ul>
+                <li>${i.numOne} ${i.operator} ${i.numTwo} = ${i.result}</li>
+            </ul>
+            `
+       }
+       
+    }
+   
+} //end renderCurrentResult
+
+function renderHistoryResult(payload) {
+    let recentResult = document.getElementById('resultHistory');
+    recentResult.innerHTML = '';
+
+    for(let i of payload) {
+       
+        
+       
+        recentResult.innerHTML += `
+            <ul>
+                <li>${i.numOne} ${i.operator} ${i.numTwo} = ${i.result}</li>
+            </ul>
+            `
+       
+       
+    }
+   
 }
