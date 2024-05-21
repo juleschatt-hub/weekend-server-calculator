@@ -64,12 +64,16 @@ function submitCalculationsForm(event, operator) {
 
     //data to be posted to server
     let payload = {
-        firstNumber: numOne,
-        secondnumber: numTwo,
+        numOne: numOne,
+        numTwo: numTwo,
         operator: operator
     };
 
-    axios.post('/calculations', payload)
+    axios({
+        method: 'POST',
+        url: '/calculations',
+        data: payload
+    })
         .then(function(res){
             console.log(res.data);
             getCalculation();

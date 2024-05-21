@@ -20,12 +20,40 @@ app.get('/calculations', (req, res) => {
 // POST /calculations
 app.post('/calculations', (req, res) => {
   let newCalculation = req.body;
-  
+  let numOne = newCalculation.numOne;
+  let numTwo = newCalculation.numTwo;
+  let operator = newCalculation.operator;
+  let result = 0;
   console.log('POST /calculations received a request');
   console.log('request body: ', req.body);
   console.log('calculations array', calculations);
-  calculations.push(newCalculation);
+  
   console.log('calculations array again', calculations);
+  if(operator === '+') {
+    console.log('in plus logic', newCalculation.operator);
+    console.log(newCalculation);
+    result = Number(numOne) + Number(numTwo);
+    console.log('addition result', result);
+    
+  } else if(operator === '-') { 
+    result = Number(numOne) - Number(numTwo);
+    console.log('subtraction result', result);
+  } else if(operator === '*') {
+    result = Number(numOne) * Number(numTwo);
+    console.log('multiplication result', result);
+  } else if(operator === '/') {
+    result = Number(numOne) / Number(numTwo);
+    console.log('division result', result);
+  }
+
+  let calcObjectResult = {
+    numOne: numOne,
+    numTwo: numTwo,
+    operator: operator,
+    result: result
+  };
+
+  calculations.push(calcObjectResult);
   res.sendStatus(201);
 })
 
