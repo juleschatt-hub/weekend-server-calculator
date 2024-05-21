@@ -101,17 +101,14 @@ function renderCurrentResult(payload) {
     let recentResult = document.getElementById('recentResult');
     recentResult.innerHTML = '';
 
-    for(let i of payload) {
-       
-        
+    for(let i of payload) {    
        if(payload.indexOf(i) === payload.length - 1){ 
         recentResult.innerHTML += `
             <ul>
                 <li>${i.numOne} ${i.operator} ${i.numTwo} = ${i.result}</li>
             </ul>
             `
-       }
-       
+       }     
     }
    
 } //end renderCurrentResult
@@ -119,11 +116,7 @@ function renderCurrentResult(payload) {
 function renderHistoryResult(payload) {
     let recentResult = document.getElementById('resultHistory');
     recentResult.innerHTML = '';
-
     for(let i of payload) {
-       
-        
-       
         recentResult.innerHTML += `
             <ul>
                 <li>${i.numOne} ${i.operator} ${i.numTwo} = ${i.result}</li>
@@ -138,4 +131,4 @@ function renderHistoryResult(payload) {
 function clearInput() {
     document.querySelector('#numOne').value = '';
     document.querySelector('#numTwo').value = '';
-}
+} //end clearInput
