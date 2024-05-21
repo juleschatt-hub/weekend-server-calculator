@@ -133,4 +133,9 @@ function renderHistoryResult(payload) {
        
     }
    
+} //end render history
+
+function clearInput() {
+    document.querySelector('#numOne').value = '';
+    document.querySelector('#numTwo').value = '';
 }
